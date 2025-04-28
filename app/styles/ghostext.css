@@ -1,0 +1,147 @@
+/* GhostText Animations and Styles */
+
+/* Main Section */
+.ghost-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #F5F5F5;
+    color: black;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'serif';
+    text-transform: uppercase;
+  }
+  
+  /* Container for lines */
+  .ghost-container {
+    margin-top: -2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Lines of text */
+  .ghost-line {
+    font-size: 7vw;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    letter-spacing: 0.3em;
+  }
+  
+  /* Second line shifted */
+  .shifted {
+    transform: translateX(8vw);
+    letter-spacing: 0.2em;
+  }
+  
+  /* Each letter */
+  .ghost-letter {
+    display: inline-block;
+    cursor: pointer;
+    opacity: 0;             /* 🛠 Hidden initially */
+    filter: blur(40px);      /* 🛠 Blurred initially */
+    transition: transform 0.3s ease;
+    margin: 0 0.1em;
+    user-select: none;
+  }
+  
+  
+  /* Hover effect */
+  .ghost-letter:hover {
+    animation: hoverGhost 1s ease-in-out;
+    animation-fill-mode: both;
+  }
+  
+  /* When clicking (explode effect) */
+  .explode {
+    animation: explodeDust 1s ease-in-out forwards !important;
+  }
+  
+  /* Entrance animations */
+  @keyframes floatIn {
+    0% {
+      opacity: 0;
+      filter: blur(40px);
+      transform: translateX(400px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes ghostOut {
+    0% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      filter: blur(60px);
+      transform: translateX(-400px);
+    }
+  }
+  
+  @keyframes ghostReappearClear {
+    0% {
+      opacity: 0;
+      filter: blur(60px);
+      transform: translate(0, 40px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translate(0, 0);
+    }
+  }
+  
+  /* Hover ghost animation */
+  @keyframes hoverGhost {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+      filter: blur(0);
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0;
+      filter: blur(20px);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+  
+  /* Click Explosion (dust style) */
+  @keyframes explodeDust {
+    0% {
+      opacity: 1;
+      transform: scale(1) translate(0, 0) rotate(0deg);
+      filter: blur(0);
+    }
+    30% {
+      opacity: 0.8;
+      transform: scale(2) translate(20px, -20px) rotate(20deg);
+      filter: blur(8px);
+    }
+    70% {
+      opacity: 0.3;
+      transform: scale(3) translate(-20px, 20px) rotate(70deg);
+      filter: blur(15px);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(4) translate(50px, -50px) rotate(180deg);
+      filter: blur(20px);
+    }
+  }
+  

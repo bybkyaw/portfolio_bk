@@ -1,0 +1,119 @@
+.hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Permission Container */
+  .permission-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(20px); /* START lower */
+    background: #fff;
+    border-radius: 50px;
+    font-family: "ClashV", Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000;
+    padding: 14px 24px;
+    width: 50vw;
+    max-width: 600px;
+    z-index: 10000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0; /* Start hidden */
+    animation: fadeInFloat 1.5s ease forwards;
+  }
+  
+  /* Fade in + Floating animation */
+  @keyframes fadeInFloat {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translateY(40px); /* Lower */
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translateY(0); /* Center */
+    }
+  }
+  
+  /* Question text */
+  .permission-container span {
+    flex: 1;
+    padding-left: 12px;
+  }
+  
+  /* Button container */
+  .permissionBtns {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Button group wrapper */
+  .btn-group {
+    position: relative;
+    display: flex;
+    gap: 12px;
+  }
+  
+  /* Moving background */
+  .active-bg {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    border-radius: 50px;
+    background: #000;
+    top: 50%;
+    left: 100%;
+    transform: translate(-100%, -50%);
+    transition: all 0.4s ease;
+    z-index: 0;
+  }
+  
+  /* Move background to NO on hover */
+  .btn-group:hover .active-bg {
+    left: 0%;
+    transform: translate(0%, -50%);
+  }
+  
+  /* Button styles */
+  #denyButton,
+  #allowButton {
+    position: relative;
+    background: transparent;
+    font-family: "ClashV", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    padding: 8px 24px;
+    cursor: pointer;
+    z-index: 1;
+    color: #000;
+    transition: color 0.4s ease;
+  }
+  
+  /* Hover color effect */
+  .btn-group:hover #denyButton {
+    color: #fff;
+  }
+  
+  .btn-group:hover #allowButton {
+    color: #000;
+  }
+  
+  /* Default non-hover color */
+  .btn-group:not(:hover) #allowButton {
+    color: #fff;
+  }
+  
+  .btn-group:not(:hover) #denyButton {
+    color: #000;
+  }
+  

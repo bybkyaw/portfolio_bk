@@ -1,0 +1,59 @@
+/* ScrollIndicator styles */
+
+.btn-scroll {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  .btn-scroll::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  
+    animation: circleBounce 1.8s ease-in-out infinite both, circleFade 0.6s ease-in-out alternate infinite both;
+  }
+  
+  .icon-arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin-top: -2px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    border: 2px solid currentColor;
+    border-top: none;
+    border-left: none;
+  }
+  
+  /* Animations */
+  @keyframes circleBounce {
+    from {
+      transform: translate(-50%, -50%) scale(0.4);
+    }
+    to {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+  
+  @keyframes circleFade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
