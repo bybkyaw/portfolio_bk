@@ -45,7 +45,7 @@ const MusicPromptUI: React.FC<MusicPromptUIProps> = ({ onUserChoice }) => {
           <button id="denyButton" onClick={handleDecline}>
             No
           </button>
-          <button id="allowButton" onClick={handleAccept}>
+          <button id="allowButton" onClick={handleAccept} >
             Yes
           </button>
         </div>
