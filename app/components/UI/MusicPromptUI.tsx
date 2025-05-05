@@ -1,38 +1,40 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Howl } from "howler";
 import MusicPoint from "../musicpoints/MusicPoints";
+import { useMusic } from "../../../context/MusicContext";
 import "../../styles/music_prompt.css";
 
-interface MusicPromptUIProps {
-  onUserChoice: (choice: boolean) => void;
-}
+const MusicPromptUI: React.FC<{ onUserChoice: (choice: boolean) => void }> = ({ onUserChoice }) => {
+  const { sound, setSound, setIsMuted } = useMusic();
 
-const MusicPromptUI: React.FC<MusicPromptUIProps> = ({ onUserChoice }) => {
-  const [sound, setSound] = useState<Howl | null>(null);
-
+  // Initialize Howl and store it globally
   useEffect(() => {
-    const initializeSound = () => {
-      setSound(
-        new Howl({
-          src: [MusicPoint.MUSIC_URL],
-          autoplay: false,
-          loop: true,
-          volume: 0.5,
-        })
-      );
-    };
-    initializeSound();
-  }, []);
+    const soundInstance = new Howl({
+      src: [MusicPoint.MUSIC_URL],
+      autoplay: false,
+      loop: true,
+      volume: 0.2,
+    });
+
+    setSound(soundInstance);
+  }, [setSound]);
 
   const handleAccept = () => {
-    sound?.play();
+    if (sound) {
+      sound.play();
+      sound.mute(false);
+      setIsMuted(false); // ✅ Show "MUTE SOUND"
+    }
     onUserChoice(true);
   };
 
   const handleDecline = () => {
-    sound?.stop();
+    if (sound) {
+      sound.stop();         // stop music
+      setIsMuted(true);     // ✅ Show "UNMUTE"
+    }
     onUserChoice(false);
   };
 
@@ -42,12 +44,8 @@ const MusicPromptUI: React.FC<MusicPromptUIProps> = ({ onUserChoice }) => {
       <div className="permissionBtns">
         <div className="btn-group">
           <div className="active-bg" />
-          <button id="denyButton" onClick={handleDecline}>
-            No
-          </button>
-          <button id="allowButton" onClick={handleAccept} >
-            Yes
-          </button>
+          <button id="denyButton" onClick={handleDecline}>No</button>
+          <button id="allowButton" onClick={handleAccept}>Yes</button>
         </div>
       </div>
     </div>
@@ -56,58 +54,4 @@ const MusicPromptUI: React.FC<MusicPromptUIProps> = ({ onUserChoice }) => {
 
 export default MusicPromptUI;
 
-
-// import { useState, useEffect } from "react";
-// import { Howl } from "howler";
-// import MusicPoint from "../musicpoints/MusicPoints";
-// import "../../styles/music_prompt.css";
-
-// interface MusicPromptUIProps {
-//   onUserChoice: (choice: boolean) => void;
-// }
-
-// const MusicPromptUI: React.FC<MusicPromptUIProps> = ({ onUserChoice }) => {
-//   const [sound, setSound] = useState<Howl | null>(null);
-
-//   useEffect(() => {
-//     const initializeSound = () => {
-//       setSound(
-//         new Howl({
-//           src: [MusicPoint.MUSIC_URL],
-//           autoplay: false,
-//           loop: true,
-//           volume: 0.5,
-//         })
-//       );
-//     };
-
-//     initializeSound();
-//   }, []);
-
-//   const handleAccept = () => {
-//     sound?.play();
-//     onUserChoice(true); // Notify parent component that the user chose "Yes"
-//   };
-
-//   const handleDecline = () => {
-//     sound?.stop();
-//     onUserChoice(false); // Notify parent component that the user chose "No"
-//   };
-
-//   return (
-//     <div id="permission" className="permission-container show">
-//       <span>Accept playing music?</span>
-//       <div className="permissionBtns">
-//         <button id="denyButton" onClick={handleDecline}>
-//           No
-//         </button>
-//         <button id="allowButton" onClick={handleAccept}>
-//           Yes
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default MusicPromptUI;
 

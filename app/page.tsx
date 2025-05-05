@@ -1,34 +1,17 @@
 'use client';
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import MusicPromptUI from "./components/UI/MusicPromptUI";
-import LoadingUI from "./components/UI/LoadingUI";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-const Home: React.FC = () => {
-  const [showLoading, setShowLoading] = useState(false);
+export default function HomeRedirect() {
   const router = useRouter();
 
-  const handleUserChoice = () => {
-    setShowLoading(true);
-  };
+  useEffect(() => {
+    router.push('/intro');
+  }, [router]);
 
-  const handleCountingComplete = () => {
-    router.push("/note"); // Direct push without overlay
-  };
+  return null;
+}
 
-  return (
-    <div className="w-full h-screen bg-black text-white flex justify-center items-center">
-      {!showLoading && (
-        <MusicPromptUI onUserChoice={handleUserChoice} />
-      )}
-      {showLoading && (
-        <LoadingUI startLoading={true} onComplete={handleCountingComplete} />
-      )}
-    </div>
-  );
-};
-
-export default Home;
 
 
