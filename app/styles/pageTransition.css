@@ -1,48 +1,39 @@
 /* PageTransition.css */
-.white-light-rise {
+
+.page-transition-overlay {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.9) 100%);
   z-index: 9999;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.85), rgba(0,0,0,0.95));
   opacity: 0;
-  transform: scale(0.8);
-  transition: none;
   pointer-events: none;
+  transition: none;
 }
 
-/* When activated */
-.white-light-rise.active {
-  animation: sunshine-pop 4.2s ease forwards;
+.page-transition-overlay.active {
+  animation: fade-to-light 4.2s ease forwards;
 }
 
-@keyframes sunshine-pop {
+@keyframes fade-to-light {
   0% {
     opacity: 0;
-    transform: scale(0.8);
-    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(0,0,0,1) 100%);
+    transform: scale(1);
+    background: radial-gradient(circle at center, rgba(0,0,0,0.85), rgba(0,0,0,0.95));
   }
 
-  20% {
-    opacity: 0.7;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0.8) 80%);
+  30% {
+    opacity: 1;
     transform: scale(1.05);
+    background: radial-gradient(circle at center, rgba(255,255,255,0.2), rgba(0,0,0,0.7));
   }
 
-  50% {
-    opacity: 1;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(0,0,0,0.6) 70%);
-    transform: scale(1.15);
-  }
-
-  80% {
-    opacity: 1;
-    background: radial-gradient(circle at center, rgba(255,255,255,1) 0%, rgba(0,0,0,0.3) 60%);
-    transform: scale(1.2);
+  60% {
+    background: radial-gradient(circle at center, rgba(255,255,255,0.6), rgba(245,245,245,0.85));
   }
 
   100% {
     opacity: 0;
-    background: #000;
-    transform: scale(1.3);
+    transform: scale(1.1);
+    background: #f5f5f5;
   }
 }
